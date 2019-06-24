@@ -29,7 +29,7 @@ class CreateBreedsTable extends Migration
             $table->string('cfa_url')->nullable();
             $table->string('vetstreet_url')->nullable();
             $table->string('vcahospitals_url')->nullable();
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->tinyInteger('experimental')->nullable();
             $table->tinyInteger('cat_friendly')->nullable();
             $table->tinyInteger('hairless')->nullable();
