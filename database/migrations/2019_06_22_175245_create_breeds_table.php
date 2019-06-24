@@ -14,9 +14,8 @@ class CreateBreedsTable extends Migration
     public function up()
     {
         Schema::create('breeds', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
-            $table->string('cat_id');
+            $table->bigIncrements('cat_id');
+            $table->string('id');
             $table->string('name');
             $table->string('temperament')->nullable();
             $table->string('life_span')->nullable();
@@ -24,9 +23,18 @@ class CreateBreedsTable extends Migration
             $table->string('wikipedia_url')->nullable();
             $table->string('origin')->nullable();
             $table->string('weight_imperial')->nullable();
+            $table->string('weight_metric')->nullable();
             $table->string('country_code')->nullable();
+            $table->string('country_codes')->nullable();
+            $table->string('cfa_url')->nullable();
+            $table->string('vetstreet_url')->nullable();
+            $table->string('vcahospitals_url')->nullable();
+            $table->string('description')->nullable();
             $table->tinyInteger('experimental')->nullable();
+            $table->tinyInteger('cat_friendly')->nullable();
             $table->tinyInteger('hairless')->nullable();
+            $table->tinyInteger('indoor')->nullable();
+            $table->tinyInteger('lap')->nullable();
             $table->tinyInteger('natural')->nullable();
             $table->tinyInteger('rare')->nullable();
             $table->tinyInteger('rex')->nullable();
@@ -45,6 +53,8 @@ class CreateBreedsTable extends Migration
             $table->tinyInteger('social_needs')->nullable();
             $table->tinyInteger('stranger_friendly')->nullable();
             $table->tinyInteger('vocalisation')->nullable();
+            $table->tinyInteger('suppressed_tail')->nullable();
+            $table->unique('cat_id');
         });
     }
 
