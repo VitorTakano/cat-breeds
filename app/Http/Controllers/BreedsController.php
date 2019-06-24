@@ -22,9 +22,14 @@ class BreedsController extends Controller
 	    		try {
 	    			$breed = DB::table('breeds')->where('name', 'like', '%' . $name . '%')->get();
 	    			if(count($breed) > 0){
-	    				return json_encode($breed);
+	    				foreach ($breed as $value) {
+	    					$filtered_array = array_filter((array)$value,'strlen');
+	    					unset($filtered_array['cat_id']);
+	    					unset($filtered_array['experimental']);
+	    					$response[] = $filtered_array;
+	    				}
+	    				return json_encode($response);
 	    			} else {
-	    				var_dump('teste');die();
 			    		$client = new Client();
 			    		$response = $client->get('https://api.thecatapi.com/v1/breeds/search', [
 						    'headers' => [
