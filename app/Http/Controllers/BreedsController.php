@@ -84,4 +84,8 @@ class BreedsController extends Controller
 		}
 		DB::table('breeds')->insert($breed);
     }
+
+    public function getbyId($id){
+    	return Breeds::find($id);
+    }
 }
