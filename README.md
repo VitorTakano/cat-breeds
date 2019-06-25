@@ -34,3 +34,11 @@ DB_DATABASE=homestead
 DB_USERNAME=homestead
 DB_PASSWORD=secret
 ```
+Execute command to create the tables.
+```
+php artisan migrate
+```
+
+## Tests
+
+In the project folder there is a file (Insomnia_CatBreeds.json) that was used to test the API requests.

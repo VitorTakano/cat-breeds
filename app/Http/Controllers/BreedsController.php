@@ -36,15 +36,14 @@ class BreedsController extends Controller
 				} else {
 		 			return $this->createBreed($name);
 				}
-			} catch (QueryException |Exception $e) {
-				return response()->json([
-		            'error' => 'Service unavailable'
-		        ], 503);
+			} catch (Exception $e) {
+				report($e);
+				return false;
 			}
 		} else {
 			return response()->json([
-	            'message' => 'No Content'
-	        ], 204);
+	            'error' => 'Internal server error'
+	        ], 500);
 		}
     }
 
@@ -93,10 +92,10 @@ class BreedsController extends Controller
 				$this->insertBreed($new_breed);
 			}
 			return $response;
-		} catch (ConnectException | RequestException | Exception $e) {
+		} catch (Exception $e) {
 			return response()->json([
-	            'error' => 'Service unavailable'
-	        ], 503);
+	            'error' => 'Internal server error'
+	        ], 500);
 		}
     }
 
