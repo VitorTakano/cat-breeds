@@ -15,6 +15,14 @@ use Illuminate\Database\QueryException;
 class BreedsController extends Controller
 {
 
+	/**
+	 *
+	 * Returns the species of the cat if it is found in database, otherwise is searched in external API and added in local database;
+	 *
+	 * @param    
+	 * @return   json
+	 *
+	 */
     public function getInfo(){
 		$name = Input::get('name');
 		if($name){
@@ -40,6 +48,14 @@ class BreedsController extends Controller
 		}
     }
 
+    /**
+	 *
+	 * Filter null fields and experimental field;
+	 *
+	 * @param    object $bread The object to be filtered
+	 * @return   json
+	 *
+	*/
     public function filterResponse($bread){
     	$filtered_array = array_filter((array)$bread,'strlen');
 		unset($filtered_array['cat_id']);
@@ -53,6 +69,14 @@ class BreedsController extends Controller
 		return $filtered_array;
     }
 
+    /**
+	 *
+	 * Search external api for cat breed and add to database;
+	 *
+	 * @param    string $name name of the breed;
+	 * @return   json
+	 *
+	 */
     public function createBreed($name){
     	try {
     		$client = new Client();
@@ -76,6 +100,14 @@ class BreedsController extends Controller
 		}
     }
 
+    /**
+	 *
+	 * Insert Breed at database;
+	 *
+	 * @param    object $bread to be add at the database;
+	 * @return   void
+	 *
+	 */
     public function insertBreed($breed){
     	if(array_key_exists("weight", $breed)){
 			$breed["weight_imperial"] = $breed["weight"]["imperial"];
@@ -85,6 +117,14 @@ class BreedsController extends Controller
 		DB::table('breeds')->insert($breed);
     }
 
+    /**
+	 *
+	 * Returns breed by ID;
+	 *
+	 * @param    string $id to be found at the database;
+	 * @return   json
+	 *
+	 */
     public function getbyId($id){
     	return Breeds::find($id);
     }
