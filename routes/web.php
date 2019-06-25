@@ -15,4 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/breeds', 'BreedsController@getInfo');
+Route::get('breeds', 'BreedsController@getInfo');
+Route::get('breeds/{id}', 'BreedsController@getbyId');
